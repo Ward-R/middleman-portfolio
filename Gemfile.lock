@@ -23,6 +23,7 @@ GEM
     fast_blank (1.0.1)
     fastimage (2.3.1)
     ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -105,6 +106,7 @@ GEM
 PLATFORMS
   x86_64-darwin-20
   x86_64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   middleman
