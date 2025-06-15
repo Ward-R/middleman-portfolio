@@ -1,0 +1,15 @@
+// source/stylesheets/site.css.scss or a new _about.scss partial
+
+.about-profile-pic {
+  width: 250px; // Or any size you want, e.g., 200px, 300px
+  height: 284px; // Keep height equal to width for a square aspect if your image is square
+  object-fit: cover; // Ensures the image covers the area without distortion, cropping if necessary
+  border-radius: 15px; // Adjust this value for more or less rounded corners
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: adds a subtle shadow
+  margin-bottom: 20px; // Add some space below the image on small screens
+  // For larger screens, remove vertical margin if it's side-by-side
+  @media (min-width: 768px) { // Applies only on medium devices and up (Bootstrap's md breakpoint)
+    margin-bottom: 0;
+    margin-right: 30px; // Add space to the right of the image when next to text
+  }
+}
