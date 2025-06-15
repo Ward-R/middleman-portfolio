@@ -11,6 +11,8 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     backports (3.25.0)
+    bootstrap (5.3.5)
+      popper_js (>= 2.11.8, < 3)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -83,6 +85,7 @@ GEM
     padrino-support (0.15.3)
     parallel (1.26.3)
     parslet (2.0.0)
+    popper_js (2.11.8)
     public_suffix (6.0.1)
     rack (2.2.10)
     rb-fsevent (0.11.2)
@@ -109,6 +112,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bootstrap (~> 5.3)
   middleman
   middleman-autoprefixer (~> 3.0)
   tzinfo-data

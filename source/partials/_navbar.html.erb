@@ -1,0 +1,24 @@
+<% # source/partials/_navbar.html.erb %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/index.html" data-turbo-frame="main_content">
+      Ryan Ward
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <%= link_to "Projects", "/projects.html", class: "nav-link", data: { turbo_frame: "main_content" } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", "/index.html", class: "nav-link", data: { turbo_frame: "main_content" } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Photography", "/photography.html", class: "nav-link", data: { turbo_frame: "main_content" } %> <%# Check this one especially! %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Contact", "mailto:youremail@example.com", class: "nav-link" %> <%# No data-turbo-frame here! %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
