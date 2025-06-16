@@ -23,7 +23,7 @@ configure :build do
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript
+  activate :minify_javascript, compressor: ::Uglifier.new(harmony: true)
 
   # Optimize images on build (requires image_optim gem and system tools)
   # activate :imageoptim
