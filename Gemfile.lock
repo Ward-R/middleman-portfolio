@@ -113,6 +113,7 @@ DEPENDENCIES
   middleman
   middleman-autoprefixer (~> 3.0)
   tzinfo-data
+  uglifier
   wdm (~> 0.1)
 
 RUBY VERSION

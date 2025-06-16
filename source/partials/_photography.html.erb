@@ -1,15 +1,28 @@
 <turbo-frame id="main_content">
   <section id="photography-gallery" class="container py-5">
     <h2 class="text-center mb-5">Photography</h2>
-    <div id="gallery-container" class="row">
-      <div class="col-12 text-center" id="loading-message">
-        <p style="color: #E2F1E7;">Loading photos...</p>
+    <div id="carousel-container">
+      <div id="carousel-inner">
+        <% # Loop through all images in the specified folder (source/images/photography/) %>
+        <% sitemap.resources.select { |resource|
+             resource.path.start_with?('images/photography/') && # Filter by your image folder path
+             resource.path.match?(/\.(jpg|jpeg|png|gif|webp)$/i)   # Filter for common image extensions
+           }.sort_by(&:path).each do |photo_resource| %>
+          <div class="carousel-slide"> <%# <<<< ADD THIS LINE (NEW WRAPPER DIV) %>
+            <img src="<%= photo_resource.url %>" alt="<%= photo_resource.url.split('/').last.gsub(/[-_.]/, ' ').sub(/\s(jpg|jpeg|png|gif|webp)$/i, '').strip.capitalize %>">
+          </div>
+ <%# <<<< ADD THIS LINE (CLOSE WRAPPER DIV) %>
+        <% end %>
       </div>
+      <button id="prevBtn">Prev</button>
+      <button id="nextBtn">Next</button>
     </div>
+    <style>
+      /* ... CSS will go here ... */
+    </style>
   </section>
+  <% # Link to the new carousel JavaScript file %>
   <% content_for :scripts_for_photography do %>
-    <script>
-      window.photography_data_local = <%= data.photography_data.to_json.html_safe %>;
-    </script>
+    <script src="/javascripts/carousel.js"></script>
   <% end %>
 </turbo-frame>
