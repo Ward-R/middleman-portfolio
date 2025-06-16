@@ -11,7 +11,7 @@
           <div class="carousel-slide"> <%# <<<< ADD THIS LINE (NEW WRAPPER DIV) %>
             <img src="<%= photo_resource.url %>" alt="<%= photo_resource.url.split('/').last.gsub(/[-_.]/, ' ').sub(/\s(jpg|jpeg|png|gif|webp)$/i, '').strip.capitalize %>">
           </div>
- <%# <<<< ADD THIS LINE (CLOSE WRAPPER DIV) %>
+          <%# <<<< ADD THIS LINE (CLOSE WRAPPER DIV) %>
         <% end %>
       </div>
       <button id="prevBtn">Prev</button>
