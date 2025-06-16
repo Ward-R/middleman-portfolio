@@ -1,5 +1,12 @@
 <turbo-frame id="main_content">
-  <section id="photography-section" class="container">
-    <h2>My Photography</h2>
+  <section id="photography-gallery" class="container py-5">
+    <h2 class="text-center mb-5">Photography</h2>
+    <div id="gallery-container" class="row">
+      <%# This is where your photos will be loaded by JavaScript %>
+      <div class="col-12 text-center" id="loading-message">
+        <%# Using inline style here for simplicity, can be moved to CSS if desired %>
+        <p style="color: #E2F1E7;">Loading photos from Cloudinary...</p>
+      </div>
+    </div>
   </section>
 </turbo-frame>
