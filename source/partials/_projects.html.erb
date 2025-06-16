@@ -1,36 +1,37 @@
+<%# source/partials/_projects.html.erb %>
 <turbo-frame id="main_content">
-  <section id="projects-section" class="container py-5">
-    <div class="row my-5">
-      <div class="col-12">
-        <div class="container">
-          <div id="projects">
-            <h2> Projects</h2>
-            <div class="cards">
-              <% data.projects.each do |project| %>
-                <div class="card-product">
-                  <%= image_tag project.image, alt: "project image" %>
-                  <div class="card-product-infos w-100">
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h2><%= project.name %></h2>
-                      <div class="card-links">
-                        <% link_to project.github, class: 'external-link', target: '_blank' do %>
-                          <i class="fa-brands fa-github"></i>
-                        <% end %>
-                        <% if project.online?  %>
-                          <% link_to project.url, class: 'external-link', target: '_blank' do %>
-                            <i class="fas fa-external-link-alt"></i>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    </div>
-                    <p><%= project.description %></p>
-                  </div>
-                </div>
+  <section id="projects-section" class="container">
+    <div class="text-center mb-5">
+      <h2>My Projects</h2>
+      <p>A selection of my recent work, showcasing various technologies and skills.</p>
+    </div>
+    <div class="cards-list">
+      <% data.projects.each do |project| %>
+        <div class="project-item-horizontal"> <%# New class for horizontal layout %>
+          <div class="project-image-container"> <%# Container for image %>
+            <%= image_tag project.image, alt: "#{project.name} Project Image", class: "project-image-thumb" %>
+          </div>
+          <div class="project-details-horizontal"> <%# Container for text and links %>
+            <h3><%= project.name %></h3>
+            <p class="project-description"><%= project.description %></p>
+            <p class="project-tags"><strong>Tech:</strong> <%= project.tags.join(', ') %></p>
+            <% if project.team_project %>
+              <p class="project-team"><strong>Team:</strong> <%= project.team_members.join(', ') %></p>
+            <% end %>
+            <p class="project-date"><strong>Date:</strong> <%= project.date %></p>
+            <div class="project-links-horizontal">
+              <% link_to project.github, class: 'project-link-icon', target: '_blank' do %>
+                <i class="fa-brands fa-github"></i> GitHub
+              <% end %>
+              <% if project.online? %>
+                <% link_to project.url, class: 'project-link-icon', target: '_blank' do %>
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                <% end %>
               <% end %>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </section>
 </turbo-frame>

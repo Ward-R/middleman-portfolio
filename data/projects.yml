@@ -1,34 +1,56 @@
-- name: Longest Word Game
-  description: Decent description of the app
-  image: projects/placeholder.png
-  url: https://www.google.com
-  github: https://www.github.com
+- name: Tokyo Turntable
+  description: This was our final rails group project at Le Wagon. Tokyo Turntable is a mobile web-app that helps users find shows to go to in the Tokyo area. It webscrapes venues and show listings, then it automatically pairs the bands to spotify so you can hear what they sound like.
+  image: projects/tokyoTT.png
+  url: https://www.tokyoturntable.com
+  github: https://github.com/Ward-R/Tokyo-Turntable
   online: true
+  tags: ["Rails", "PostgreSQL", "StimulusJS", "Bootstrap", "HTML", "CSS", "JavaScript"]
+  date: "June 2025"
+  team_project: true
+  team_members: ["Will Sebastian", "Juilian Schoenfeld", "Hikari Hashiguchi"]
 
-- name: Movie Watchlist
-  description: Decent description of the app
-  image: projects/placeholder.png
-  url: https://www.google.com
-  github: https://www.github.com
+- name: Rentool
+  description: This was our first group project at Le Wagon. It is a Desktop Rails app airbnb clone. It is a basic marketplace that allows users to list their tools for rent, and other users can rent them for use.
+  image: projects/rentool.png
+  url: https://airbnb-carved-duck-e9e78c22c0c6.herokuapp.com/
+  github: https://github.com/Ward-R/rails-rentool
   online: true
+  tags: ["Rails", "PostgreSQL", "StimulusJS", "Bootstrap", "HTML", "CSS", "JavaScript"]
+  date: "May 2025"
+  team_project: true
+  team_members: ["Will Sebastian", "Juilian Schoenfeld", "Hikari Hashiguchi"]
 
-- name: Airbnb
-  description: Decent description of the app
-  image: projects/placeholder.png
-  url: https://www.google.com
-  github: https://www.github.com
-  online: true
 
-- name: Final project
-  description: Decent description of the app
-  image: projects/placeholder.png
-  url: https://www.google.com
-  github: https://www.github.com
-  online: true
+  # filler fake apps for testing
 
-- name: Yelp
-  description: Decent description of the app
-  image: projects/placeholder.png
-  url: https://www.google.com
-  github: https://www.github.com
-  online: false
+# - name: Airbnb Clone
+#   description: A full-stack marketplace platform for property rentals.
+#   image: projects/airbnb_clone.png # Replace with actual image path
+#   url: https://airbnb-clone-app.herokuapp.com
+#   github: https://github.com/yourusername/airbnb-clone
+#   online: true
+#   tags: ["Rails", "PostgreSQL", "JavaScript", "Mapbox API", "Heroku"]
+#   date: "January 2025"
+#   team_project: true
+#   team_members: ["Alice Smith", "Bob Johnson"] # Optional: list names
+
+# - name: Tokyo Foodie (Final Project)
+#   description: A platform connecting users with unique food experiences in Tokyo.
+#   image: projects/tokyo_foodie.png # Replace with actual image path
+#   url: https://tokyo-foodie.herokuapp.com
+#   github: https://github.com/yourusername/tokyo-foodie
+#   online: true
+#   tags: ["Rails API", "Go (Backend)", "React (Frontend)", "PostgreSQL", "Cloudinary"]
+#   date: "April 2025"
+#   team_project: true
+#   team_members: ["Alice Smith", "Bob Johnson", "Your Name"] # List team members if applicable
+
+# - name: Restaurant Reviews
+#   description: Basic app to review restaurants.
+#   image: projects/restaurant_reviews.png # Replace with actual image path
+#   url: ""
+#   github: https://github.com/yourusername/restaurant-reviews
+#   online: false
+#   tags: ["Rails", "PostgreSQL", "CSS"]
+#   date: "December 2024"
+#   team_project: false
