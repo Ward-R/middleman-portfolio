@@ -4,6 +4,20 @@
 $med-green: #5F9EA0;
 $light-green: #A2D9CE;
 $text-color-page-content: #E2F1E7; // Your whitish-green text color
+$project-border-color: #387478; // Also bring this up if it's used across files
+$text-color-primary: #629584; // Also bring this up if it's used across files
+$text-color-secondary: #629584; // Also bring this up if it's used across files
+
+
+// --- Global Text Color for Main Content Areas ---
+// This is a more robust way to set the default text color for most elements
+// within your main content sections, ensuring it overrides Bootstrap defaults.
+main { // Target the main content wrapper (from layout.html.erb: <main class="pt-5">)
+  color: $text-color-page-content; // Apply default text color here
+}
+
+// You might need to selectively override this for elements that should be different colors
+// (e.g., project card text, which you have as $text-color-primary/$text-color-secondary)
 
 .about-profile-pic {
   width: 250px;
@@ -21,21 +35,20 @@ $text-color-page-content: #E2F1E7; // Your whitish-green text color
 #about-section {
   padding-top: 80px;
   padding-bottom: 50px;
-  color: $text-color-page-content;
+  // color: $text-color-page-content; // REMOVE THIS - handled by 'main' selector now
 
-  h2 { /* NEW RULE: Target h2 only within #about-section */
-    text-align: left; /* Justify 'About' header to the left */
-    margin-bottom: 30px; /* Keep spacing below it */
-    font-size: 2.5rem; /* Keep font size consistent */
-    color: white; /* Keep color consistent */
+  h2 {
+    text-align: left;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: E2F1E7; // Keep this as 'white' for the About heading
   }
 }
 
 // --- General Section Heading Alignment (for h2) ---
-// This rule will now apply to h2s in #skills-section, #education-section, and #projects-section
-section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from general centering */
+section:not(#about-section) h2 {
   text-align: center;
-  color: white;
+  color: E2F1E7; // Keep these as 'white' for other section headings
   margin-bottom: 30px;
   font-size: 2.5rem;
 }
@@ -43,18 +56,26 @@ section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from genera
 
 // --- Specific styles for About Section Text ---
 #about-text-content {
-  p {
-    color: $text-color-page-content;
+  // p { // REMOVE THIS - handled by 'main' selector
+  //   color: $text-color-page-content;
+  //   font-size: 1rem;
+  //   line-height: 1.6;
+  //   margin-bottom: 15px;
+  // }
+  // Instead, apply directly where needed or rely on 'main'
+  p { // Re-adding p here to ensure font-size/line-height are specific
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 15px;
   }
 }
 
+
 // --- Specific styles for Skills Section (Icons) ---
 #skills-section {
   padding-top: 50px;
   padding-bottom: 50px;
+  // color: $text-color-page-content; // Add this if there's general text directly in #skills-section that needs the color
 }
 
 .skills-grid {
@@ -66,11 +87,11 @@ section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from genera
 
   i {
     font-size: 3rem;
-    color: $med-green;
+    color: $light-green;
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
     &:hover {
       transform: translateY(-5px);
-      color: $light-green;
+      color: $med-green;
     }
     &.colored {
       color: $med-green !important;
@@ -81,20 +102,21 @@ section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from genera
 // --- Specific styles for Education Section (List) ---
 #education-section {
   padding-top: 50px;
-  padding-bottom: 150px; /* Keep this as you set it for spacing with footer */
+  padding-bottom: 150px;
+  // color: $text-color-page-content; // Add this if there's general text directly in #education-section that needs the color
 }
 
 .education-list {
   padding-left: 0;
   text-align: left;
   li {
+    // color: $text-color-page-content; // REMOVE THIS - handled by 'main' selector
     font-size: 1rem;
-    color: $text-color-page-content;
     margin-bottom: 10px;
     line-height: 1.5;
 
     strong {
-      color: $light-green;
+      color: $light-green; // This override for strong is correct
       font-weight: 600;
     }
   }
@@ -107,4 +129,24 @@ section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from genera
   background-color: $light-green;
   margin: 60px auto;
   opacity: 0.7;
+}
+
+// Project Section - make sure these variables are defined at the top
+#projects-section {
+  padding-top: 50px;
+  padding-bottom: 160px;
+
+  .text-center {
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #E2F1E7; // This should now work for Projects H2
+    }
+    p {
+      font-size: 1.1rem;
+      color: #E2F1E7; // This should now work for Projects P
+    }
+  }
+
+  // ... rest of your project-specific styles using $text-color-primary and $text-color-secondary correctly ...
 }

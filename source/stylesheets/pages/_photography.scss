@@ -1,31 +1,74 @@
-#photography-section {
-  padding-top: 80px;   /* Set top padding to match projects-section */
-  padding-bottom: 50px; /* Also add bottom padding for consistency */
-  color: #E2F1E7;
+/* source/stylesheets/_photography.scss or site.scss */
+#photography-page {
+  padding-top: 80px; /* Adjust this value as needed to clear the navbar. Start with 80px. */
+  padding-bottom: 50px; /* Add some space at the bottom */
+  h1 {
+    color: #E2F1E7; /* Or whatever color matches your green background gradient */
+    text-align: center;
+    margin-bottom: 40px; /* Space below the title */
+  }
+}
+.photo-display-area {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #E2F1E7;
+  border: 1px solid #387478;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px; /* ADD THIS LINE */
 }
 
+.image-aspect-ratio-wrapper {
+  position: relative; /* Needed for absolute positioning of the image */
+  width: 100%;
+  /* Choose your desired aspect ratio here. Common for photography:
+     - For 3:2 landscape photos (width 3, height 2): (2 / 3) * 100% = 66.66%
+     - For 4:3 landscape photos (width 4, height 3): (3 / 4) * 100% = 75%
+     - For 16:9 landscape video-like: (9 / 16) * 100% = 56.25%
+     - For 1:1 square: 100%
+     - For 2:3 portrait (reverse of 3:2): (3 / 2) * 100% = 150%
+     Pick an aspect ratio that fits most of your photos well, or choose a common one like 3:2 or 4:3.
+  */
+  padding-bottom: 66.66%; /* Example: Setting for 3:2 aspect ratio */
+  overflow: hidden; /* Hides any part of the image that might extend beyond the wrapper */
+  margin-bottom: 20px; /* Space between image area and buttons */
+  background-color: #E2F1E7; /* A subtle background to show the reserved space */
+}
 
-// --- Photography Gallery Styles ---
-#photography-gallery {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  background-color: transparent; // Ensure it respects the body gradient
-  h2 { // Styles for the 'Photography' heading
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-  }
-  .gallery-image {
-    border: 2px solid $light-green;
-    object-fit: cover;
-    width: 100%;
-    height: 250px; // Fixed height for consistent look, adjust as needed
-    display: block; // Ensures no extra space below image
-    margin: 0 auto; // Centers image within its column if it doesn't take full width
-  }
-  .image-caption {
-    color: $text-color-page-content;
-    font-size: 0.9rem;
-  }
+#main-photo {
+  position: absolute; /* Take image out of normal flow */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit determines how the image fits into the wrapper:
+     - 'contain': Scales the image to fit within the box, preserving its aspect ratio.
+                  Might leave empty space (letterboxing/pillarboxing) if image aspect ratio
+                  doesn't match the wrapper's. Usually best for photography to show entire image.
+     - 'cover': Scales the image to fill the box, preserving its aspect ratio.
+                Will crop parts of the image if its aspect ratio doesn't match the wrapper's.
+     - 'fill': Stretches/squishes the image to fill the box, *not* preserving aspect ratio. Avoid this.
+  */
+  object-fit: contain; /* RECOMMENDED for showing entire photos */
+  display: block; /* Still good practice */
+  margin: 0; /* Remove any previous margins that might interfere */
+}
+
+.photo-navigation button {
+  padding: 10px 20px;
+  font-size: 1em;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #629584; /* Start color of your gradient */
+  color: #E2F1E7;
+  border: 1px solid #629584; /* A darker green border from your gradient */
+  border-radius: 5px; /* Keep existing border-radius if you like it */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+.photo-navigation button:hover {
+  background-color: #387478; /* End color of your gradient on hover */
+  border-color: #629584; /* Swap border color on hover for effect */
 }
