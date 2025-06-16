@@ -1,17 +1,54 @@
-<turbo-frame id="main_content">
-  <section id="about-section" class="container">
-    <div class="row align-items-center"> <%# Use Bootstrap row for side-by-side layout %>
-      <div class="col-md-4 text-center"> <%# Column for the image, centers it on smaller screens %>
-        <%= image_tag 'headshot.jpg', alt: "Ryan Ward Headshot", class: 'about-profile-pic img-fluid' %>
-      </div>
-      <div class="col-md-8"> <%# Column for the text %>
-        <div id="about-text-content">
-          <h2>About</h2>
-          <p>Hello! I'm a Le Wagon Full Stack Web Development graduate in Tokyo, Japan. My 20 years as a 1st Class Power Engineer honed my problem-solving and system management skills.</p>
-          <p>I'm now a backend-focused developer proficient in Ruby on Rails, PostgreSQL, and JavaScript, also exploring Go. I'm actively seeking Junior Backend Developer positions in Tokyo to leverage my unique blend of seasoned experience and fresh coding skills.</p>
-          <p>Outside of work, I enjoy learning about Japanese language, culture, and photography (visit my gallery!).</p>
-        </div>
+<%# source/partials/_about.html.erb %>
+<section id="about-section" class="container">
+  <div class="row align-items-center"> <%# Use Bootstrap row for side-by-side layout %>
+    <div class="col-md-4 text-center"> <%# Column for the image, centers it on smaller screens %>
+      <%= image_tag 'headshot.jpg', alt: "Ryan Ward Headshot", class: 'about-profile-pic img-fluid' %>
+    </div>
+    <div class="col-md-8"> <%# Column for the text %>
+      <div id="about-text-content">
+        <h2>About</h2>
+        <p>Hello! I'm a Le Wagon Full Stack Web Development graduate in Tokyo, Japan. My 20 years as a 1st Class Power Engineer honed my problem-solving and system management skills.</p>
+        <p>I'm now a backend-focused developer proficient in Ruby on Rails, PostgreSQL, and JavaScript, also exploring Go. I'm actively seeking Junior Backend Developer positions in Tokyo to leverage my unique blend of seasoned experience and fresh coding skills.</p>
+        <p>Outside of work, I enjoy learning about Japanese language, culture, and photography (visit my gallery!).</p>
       </div>
     </div>
-  </section>
-</turbo-frame>
+  </div>
+</section>
+<div class="section-divider"></div>
+<%# --- SKILLS SECTION --- %>
+<section id="skills-section" class="container text-center">
+  <h2>Skills</h2>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-10 col-lg-8">
+      <div class="skills-grid">
+        <i class="devicon-ruby-plain"></i> <%# REMOVED colored class as we will set color via CSS %>
+        <i class="devicon-rails-plain"></i>
+        <i class="devicon-postgresql-plain"></i>
+        <i class="devicon-javascript-plain"></i>
+        <i class="devicon-go-plain"></i>
+        <i class="devicon-html5-plain"></i>
+        <i class="devicon-css3-plain"></i>
+        <i class="devicon-bootstrap-plain"></i>
+        <i class="devicon-git-plain"></i>
+        <i class="devicon-github-plain"></i>
+        <i class="devicon-heroku-plain"></i>
+        <i class="devicon-vscode-plain"></i>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<%# --- EDUCATION SECTION --- %>
+<section id="education-section" class="container text-center">
+  <h2>Education</h2>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <ul class="list-unstyled education-list">
+        <li><strong>Full Stack Web Development</strong> - Le Wagon Tokyo (2024)</li>
+        <li><strong>Bachelor of Management (with Distinction)</strong> - Athabasca University (2018 - 2022)</li>
+        <li><strong>JLPT N5</strong> - Japan Educational Exchanges and Services (2024)</li>
+        <li><strong>1st Class Power Engineering</strong> - ABSA (2004 - 2016)</li>
+      </ul>
+    </div>
+  </div>
+</section>

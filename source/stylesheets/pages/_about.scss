@@ -1,21 +1,110 @@
-// source/stylesheets/site.css.scss or a new _about.scss partial
+// In source/stylesheets/site.css.scss or a relevant partial
+
+// --- Variables (Ensure these are at the top or imported) ---
+$med-green: #5F9EA0;
+$light-green: #A2D9CE;
+$text-color-page-content: #E2F1E7; // Your whitish-green text color
 
 .about-profile-pic {
-  width: 250px; // Or any size you want, e.g., 200px, 300px
-  height: 270px; // Keep height equal to width for a square aspect if your image is square
-  object-fit: cover; // Ensures the image covers the area without distortion, cropping if necessary
-  border-radius: 15px; // Adjust this value for more or less rounded corners
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: adds a subtle shadow
-  margin-bottom: 20px; // Add some space below the image on small screens
-  // For larger screens, remove vertical margin if it's side-by-side
-  @media (min-width: 768px) { // Applies only on medium devices and up (Bootstrap's md breakpoint)
+  width: 250px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  @media (min-width: 768px) {
     margin-bottom: 0;
-    margin-right: 30px; // Add space to the right of the image when next to text
+    margin-right: 30px;
   }
 }
 
 #about-section {
-  padding-top: 80px;   /* Set top padding to match projects-section */
-  padding-bottom: 50px; /* Also add bottom padding for consistency */
-  color: #E2F1E7;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  color: $text-color-page-content;
+
+  h2 { /* NEW RULE: Target h2 only within #about-section */
+    text-align: left; /* Justify 'About' header to the left */
+    margin-bottom: 30px; /* Keep spacing below it */
+    font-size: 2.5rem; /* Keep font size consistent */
+    color: white; /* Keep color consistent */
+  }
+}
+
+// --- General Section Heading Alignment (for h2) ---
+// This rule will now apply to h2s in #skills-section, #education-section, and #projects-section
+section:not(#about-section) h2 { /* MODIFIED: Exclude #about-section from general centering */
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+
+// --- Specific styles for About Section Text ---
+#about-text-content {
+  p {
+    color: $text-color-page-content;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+}
+
+// --- Specific styles for Skills Section (Icons) ---
+#skills-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 30px;
+  margin-top: 20px;
+
+  i {
+    font-size: 3rem;
+    color: $med-green;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    &:hover {
+      transform: translateY(-5px);
+      color: $light-green;
+    }
+    &.colored {
+      color: $med-green !important;
+    }
+  }
+}
+
+// --- Specific styles for Education Section (List) ---
+#education-section {
+  padding-top: 50px;
+  padding-bottom: 150px; /* Keep this as you set it for spacing with footer */
+}
+
+.education-list {
+  padding-left: 0;
+  text-align: left;
+  li {
+    font-size: 1rem;
+    color: $text-color-page-content;
+    margin-bottom: 10px;
+    line-height: 1.5;
+
+    strong {
+      color: $light-green;
+      font-weight: 600;
+    }
+  }
+}
+
+// --- Section Divider CSS ---
+.section-divider {
+  width: 80%;
+  height: 1px;
+  background-color: $light-green;
+  margin: 60px auto;
+  opacity: 0.7;
 }
