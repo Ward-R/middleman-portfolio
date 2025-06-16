@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const galleryContainer = document.getElementById('gallery-container');
   const loadingMessage = document.getElementById('loading-message');
 
-  // !!! IMPORTANT: CONFIRM THESE VALUES ARE CORRECT FOR YOUR ACCOUNT !!!
-  const cloudName = 'dz6noqzb3'; // Your Cloudinary Cloud Name
-  const folderName = 'portfolio_photography'; // Your exact Cloudinary folder name
+  const cloudName = 'dz6noqzb3';
+  const folderNameAsTag = 'portfolio_photography'; // Using folder name as the tag
 
-  // Cloudinary API endpoint to list resources (images) in a specific folder.
-  // max_results=50: Fetches up to 50 images. Adjust if you have more or less.
-  // We are NOT including an API key in the URL, as Resource List Access should now be public for your folder.
-  const apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image?type=upload&prefix=${folderName}/&max_results=50`;
+  // !!! CRITICAL CHANGE TO API URL !!!
+  // Now using the 'tag' endpoint, which is designed for client-side listing of resources.
+  // This endpoint is generally designed to work with public assets and correct CORS.
+  const apiUrl = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/tag/${folderNameAsTag}?max_results=50`;
+
 
   // Only proceed if we are on a page that has the #gallery-container element
   if (!galleryContainer) {
@@ -21,58 +21,45 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(apiUrl)
     .then(response => {
       if (!response.ok) {
-        // Log details about the error for easier debugging
         console.error('Cloudinary API Error Response:', response);
-        throw new Error(`HTTP error! Status: ${response.status}. Could not load images from Cloudinary.
-          Please double-check:
-          1. Your 'cloudName' and 'folderName' in photography_loader.js are correct.
-          2. 'Resource list' is UNCHECKED under 'Restricted image types' in Cloudinary Settings > Security.`);
+        throw new Error(`HTTP error! Status: ${response.status}. Failed to load images using the TAG endpoint.
+          Please check:
+          1. Your 'cloudName' and 'folderNameAsTag' in photography_loader.js are correct.
+          2. All your photos in Cloudinary are TAGGED with 'portfolio_photography'.
+          3. Your Cloudinary API settings (Resource List UNCHECKED, Allowed Fetch Domains EMPTY).`);
       }
       return response.json();
     })
     .then(data => {
-      // Remove the loading message once data is fetched
       if (loadingMessage) {
         loadingMessage.remove();
       }
 
       if (data.resources && data.resources.length > 0) {
-        // Iterate over each image resource returned by Cloudinary
         data.resources.forEach(resource => {
-          // Construct the image URL with Cloudinary transformations for optimization
-          // f_auto: automatically select best format (e.g., WebP)
-          // q_auto: automatically select best quality
-          // w_600: set width to 600px (adjust this size for your gallery layout)
-          // c_limit: ensures image fits within bounds without cropping, maintains aspect ratio
+          // Construct the image URL. resource.public_id will include the folder name.
           const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_600,c_limit/${resource.public_id}.${resource.format}`;
 
-          // Attempt to get alt text and caption from Cloudinary's context metadata.
-          // (You can add this metadata to your images in Cloudinary's Media Library when uploading or editing.)
           const altText = (resource.context && resource.context.alt) ? resource.context.alt : resource.public_id.split('/').pop().replace(/[-_]/g, ' ');
           const captionText = (resource.context && resource.context.caption) ? resource.context.caption : '';
 
-          // Create the Bootstrap column div for each image
           const colDiv = document.createElement('div');
-          colDiv.className = 'col-md-6 col-lg-4 mb-4'; // Responsive grid: 2 per row on medium, 3 on large screens
-
-          // Populate the column div with the image and its caption
+          colDiv.className = 'col-md-6 col-lg-4 mb-4';
           colDiv.innerHTML = `
             <img src="${imageUrl}" alt="${altText}" class="img-fluid rounded shadow-sm gallery-image">
             ${captionText ? `<p class="image-caption text-center mt-2">${captionText}</p>` : ''}
           `;
-          galleryContainer.appendChild(colDiv); // Add the image to the gallery container
+          galleryContainer.appendChild(colDiv);
         });
       } else {
-        // Display a message if no photos are found
-        galleryContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #E2F1E7;">No photos found in this folder. Please double-check the folder name in your JavaScript and Cloudinary settings.</p></div>';
+        galleryContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #E2F1E7;">No photos found with this tag. Please ensure images are tagged correctly.</p></div>';
       }
     })
     .catch(error => {
-      // Handle any errors during the fetch process
       console.error('Error fetching Cloudinary images:', error);
       if (loadingMessage) {
         loadingMessage.remove();
       }
-      galleryContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #E2F1E7;">Failed to load photos. Please check your browser console for details and verify your Cloudinary setup.</p></div>';
+      galleryContainer.innerHTML = '<div class="col-12 text-center"><p style="color: #E2F1E7;">Failed to load photos. Please check your browser console for details and verify Cloudinary setup.</p></div>';
     });
 });
