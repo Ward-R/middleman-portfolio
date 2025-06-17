@@ -1,7 +1,5 @@
-// This is where it all goes :)
-// source/javascripts/site.js
-
 // Listen for Turbo Frame loads across the entire document
+// This is to collapse the hamburger on mobile
 document.addEventListener('turbo:frame-load', (event) => {
   // Check if the loaded frame is your main content frame
   // This ensures we only run this logic when the main content area changes
@@ -34,4 +32,4 @@ document.addEventListener('turbo:frame-load', (event) => {
   }
 });
 
-// You can add any other global site-wide JavaScript here
+// global site-wide JavaScript here

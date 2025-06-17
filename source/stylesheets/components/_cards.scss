@@ -1,10 +1,7 @@
-// In source/stylesheets/site.css.scss
-
-// Define variables (if not already defined)
 $project-border-color: #387478 ;
 $text-color-primary: #629584;
 $text-color-secondary: #629584;
-$light-green: #A2D9CE; // Ensure this is defined for hover effects
+$light-green: #A2D9CE;
 
 #projects-section {
   padding-top: 50px;
@@ -97,10 +94,6 @@ $light-green: #A2D9CE; // Ensure this is defined for hover effects
     flex-shrink: 0;
     width: 30%; // Desktop: Image container takes 30% width
     max-width: 250px; // Limits the max width of the image container
-    // height: 100%; // REMOVE THIS LINE or adjust if you have issues with vertical stretching of image container
-                     // if the description text is much longer or shorter than the image height.
-                     // The 'align-items: stretch' on parent handles height.
-
     display: flex;         // Make this a flex container
     align-items: center;   // Vertically center the image within its container on desktop
     justify-content: center; // Horizontally center the image within its container on desktop

@@ -1,17 +1,10 @@
-// source/javascripts/photography_viewer.js
-
 console.log("Photography Viewer script loading...");
 
 // Define the core initialization function
 function initializePhotographyViewer() {
   console.log("Initializing Photography Viewer logic...");
 
-  // Remove existing event listeners to prevent duplicates on re-initialization
-  // This is crucial if elements might not be completely replaced by Turbo,
-  // or if you want to be safe. For simple button clicks, replacing content
-  // often cleans up old listeners, but explicit removal is safer.
-
-  // First, find the elements. These need to be looked up every time.
+  // Find the elements.
   const mainPhoto = document.getElementById('main-photo');
   const zoomTrigger = mainPhoto ? mainPhoto.closest('.image-zoom-trigger') : null;
   const prevBtn = document.getElementById('prevBtn');
@@ -23,7 +16,7 @@ function initializePhotographyViewer() {
     return;
   }
 
-  // Define image paths (these can stay constant)
+  // Define image paths (IF NEW PHOTOS ADDED THEY MUST BE ADDED HERE!!)
   const imagePaths = [
     "/images/photography/1-DSCF3844_u4cobo.jpg",
     "/images/photography/2-DSCF3877_azr4zp.jpg",
@@ -77,13 +70,6 @@ function initializePhotographyViewer() {
     console.error("main-photo element not found.");
     return; // Critical element missing, exit initialization
   }
-
-
-  // --- Event Listener Setup ---
-  // Ensure we don't add duplicate listeners if initializePhotographyViewer is called multiple times
-  // Best practice is to remove existing listeners before adding new ones if the elements might persist.
-  // However, since Turbo replaces the *contents* of the frame, the old elements and their listeners are removed.
-  // So, simply adding them fresh to the *new* elements is usually sufficient.
 
   // Zoom Trigger Click
   const handleZoomClick = (event) => {

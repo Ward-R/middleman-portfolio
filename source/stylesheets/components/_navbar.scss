@@ -1,19 +1,6 @@
-// source/stylesheets/_navbar.scss
-
-// Ensure your color variables are accessible here
-// $med-green: #5F9EA0;
-// $light-green: #A2D9CE;
-
 // --- Navbar Styling ---
 .navbar {
-  background-color: #E2F1E7 !important; /* CHANGED: Apply light green background */
-  // If you want a specific height like your footer (e.g., 56px), uncomment and use this:
-  // height: 56px;
-  // display: flex;
-  // align-items: center; /* Vertically center content if using fixed height */
-  // padding-top: 0; /* Remove default padding if using fixed height */
-  // padding-bottom: 0; /* Remove default padding if using fixed height */
-
+  background-color: #E2F1E7 !important;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow below the navbar */
   border-bottom: none; /* Remove any default Bootstrap border */
 }
@@ -31,27 +18,26 @@
 
 // Style the navigation links (e.g., "Projects", "Photography")
 .navbar-nav .nav-link {
-  color: $med-green !important; /* CHANGED: Make links medium green */
+  color: $med-green !important;
   font-weight: 500;
   transition: color 0.3s ease;
   &:hover {
-    color: darken($med-green, 10%) !important; /* Darken med-green on hover for contrast */
+    color: darken($med-green, 10%) !important;
   }
 }
 
 // Style the hamburger icon for mobile (toggler)
 .navbar-toggler {
-  border-color: rgba(0,0,0,0.2) !important; /* CHANGED: Darker border for the toggler button on light background */
+  border-color: rgba(0,0,0,0.2) !important;
   &:focus {
-    box-shadow: none !important; /* Remove blue outline on focus */
+    box-shadow: none !important;
   }
   .navbar-toggler-icon {
-    /* CHANGED: This SVG code draws the 3 lines of the hamburger icon in medium green */
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2895, 158, 160, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
   }
 }
 
 // Style the collapsed menu background when it opens (e.g., on mobile)
 .navbar-collapse {
-  background-color: #E2F1E7; /* CHANGED: Ensure the background is consistent when the menu is expanded */
+  background-color: #E2F1E7;
 }

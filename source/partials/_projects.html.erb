@@ -1,4 +1,3 @@
-<%# source/partials/_projects.html.erb %>
 <turbo-frame id="main_content">
   <section id="projects-section" class="container">
     <div class="text-center mb-5">
@@ -7,7 +6,7 @@
     </div>
     <div class="cards-list">
       <% data.projects.each do |project| %>
-        <div class="project-item-horizontal"> <%# New class for horizontal layout %>
+        <div class="project-item-horizontal">
           <div class="project-image-container"> <%# Container for image %>
             <%= image_tag project.image, alt: "#{project.name} Project Image", class: "project-image-thumb" %>
           </div>
