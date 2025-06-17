@@ -7,7 +7,7 @@ App home: www.ryanward.com
 
 ## Built With
 - [Middleman]([https://guides.rubyonrails.org/](https://github.com/dmbf29/middleman-template)) - Backend / Front-end
-- [Stimulus JS](https://stimulus.hotwired.dev/) - Front-end JS
+- [Bootstrap/Hotwired/turbo] - Front-end JS
 - [Netlify](https://netlify.com/) - Deployment
 - [Bootstrap](https://getbootstrap.com/) — Styling
 
