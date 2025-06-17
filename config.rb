@@ -23,7 +23,13 @@ configure :build do
   activate :minify_css
 
   # Minify Javascript on build
-  activate :minify_javascript, compressor: ::Uglifier.new(harmony: true)
+  # COMMENT OUT THIS LINE TEMPORARILY TO TEST IF MINIFICATION IS THE PROBLEM
+  # activate :minify_javascript,
+  #   compressor: ::Uglifier.new(harmony: true),
+  #   inline: true,
+  #   ignore: ['turbo.es2017-umd.js'] # Your previous change
+
+  # Also ensure you have removed the separate config.define_setting :js_compress_options block
 
   # Optimize images on build (requires image_optim gem and system tools)
   # activate :imageoptim

@@ -2,14 +2,28 @@
 
 console.log("Photography Viewer script loading...");
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOMContentLoaded: Initializing Photography Viewer.");
+// Define the core initialization function
+function initializePhotographyViewer() {
+  console.log("Initializing Photography Viewer logic...");
 
+  // Remove existing event listeners to prevent duplicates on re-initialization
+  // This is crucial if elements might not be completely replaced by Turbo,
+  // or if you want to be safe. For simple button clicks, replacing content
+  // often cleans up old listeners, but explicit removal is safer.
+
+  // First, find the elements. These need to be looked up every time.
   const mainPhoto = document.getElementById('main-photo');
   const zoomTrigger = mainPhoto ? mainPhoto.closest('.image-zoom-trigger') : null;
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
+  // If the elements don't exist (e.g., not on the photography page), exit early
+  if (!mainPhoto || !prevBtn || !nextBtn || !zoomTrigger) {
+    console.log("Photography viewer elements not found on current page. Skipping initialization.");
+    return;
+  }
+
+  // Define image paths (these can stay constant)
   const imagePaths = [
     "/images/photography/1-DSCF3844_u4cobo.jpg",
     "/images/photography/2-DSCF3877_azr4zp.jpg",
@@ -40,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "/images/photography/PXL_20240825_024525129-EFFECTS_fliznr.jpg"
   ];
 
-  let currentIndex = 0;
+  let currentIndex = 0; // Reset index for each initialization
 
   // Set the initial image based on the current src, or default to the first
   if (mainPhoto && imagePaths.length > 0) {
@@ -49,58 +63,56 @@ document.addEventListener('DOMContentLoaded', () => {
     if (initialIndex !== -1) {
       currentIndex = initialIndex;
     } else {
+      currentIndex = 0; // Ensure a valid index
       mainPhoto.src = imagePaths[0];
-      console.warn(`Initial image src "${initialSrc}" not found in list. Defaulting to first image.`);
+      console.warn(`Initial image src "${initialSrc}" not found in list or mainPhoto.src is empty. Defaulting to first image.`);
     }
-    if (zoomTrigger) {
-      zoomTrigger.href = imagePaths[currentIndex];
-    }
-  } else if (mainPhoto) {
+    zoomTrigger.href = imagePaths[currentIndex]; // Always update zoomTrigger href
+  } else if (mainPhoto) { // If mainPhoto element exists but has no src
+    currentIndex = 0;
     mainPhoto.src = imagePaths[0];
     console.log("main-photo had no initial src. Setting to first image.");
-    if (zoomTrigger) {
-      zoomTrigger.href = imagePaths[currentIndex];
-    }
+    zoomTrigger.href = imagePaths[currentIndex];
   } else {
     console.error("main-photo element not found.");
-    return;
+    return; // Critical element missing, exit initialization
   }
 
-  // --- NEW JS FOR TOGGLING ZOOM CLASS ---
-  if (zoomTrigger) {
-    zoomTrigger.addEventListener('click', (event) => {
-      event.preventDefault(); // Always prevent default link behavior for our custom zoom
 
-      // Toggle the 'is-zoomed' class
-      zoomTrigger.classList.toggle('is-zoomed');
+  // --- Event Listener Setup ---
+  // Ensure we don't add duplicate listeners if initializePhotographyViewer is called multiple times
+  // Best practice is to remove existing listeners before adding new ones if the elements might persist.
+  // However, since Turbo replaces the *contents* of the frame, the old elements and their listeners are removed.
+  // So, simply adding them fresh to the *new* elements is usually sufficient.
 
-      // Optional: Add/remove 'no-scroll' class to body to prevent background scrolling
-      // This is a common practice for full-screen overlays
-      document.body.classList.toggle('no-scroll', zoomTrigger.classList.contains('is-zoomed'));
+  // Zoom Trigger Click
+  const handleZoomClick = (event) => {
+    event.preventDefault();
+    zoomTrigger.classList.toggle('is-zoomed');
+    document.body.classList.toggle('no-scroll', zoomTrigger.classList.contains('is-zoomed'));
+  };
+  zoomTrigger.removeEventListener('click', handleZoomClick); // Prevent double-listening
+  zoomTrigger.addEventListener('click', handleZoomClick);
 
-    });
+  // ESC Key to close zoom
+  const handleEscapeKey = (event) => {
+    if (event.key === 'Escape' && zoomTrigger.classList.contains('is-zoomed')) {
+      zoomTrigger.classList.remove('is-zoomed');
+      document.body.classList.remove('no-scroll');
+    }
+  };
+  document.removeEventListener('keydown', handleEscapeKey); // Prevent double-listening
+  document.addEventListener('keydown', handleEscapeKey);
 
-    // Close zoom if user presses ESC key
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && zoomTrigger.classList.contains('is-zoomed')) {
-            zoomTrigger.classList.remove('is-zoomed');
-            document.body.classList.remove('no-scroll'); // Remove no-scroll
-        }
-    });
-  }
-  // --- END NEW JS FOR TOGGLING ZOOM CLASS ---
-
-
+  // Function to update the photo display
   function updatePhoto() {
     if (mainPhoto && imagePaths.length > 0) {
       mainPhoto.src = imagePaths[currentIndex];
-      if (zoomTrigger) {
-        zoomTrigger.href = imagePaths[currentIndex];
-      }
-      // If the image is currently zoomed, make sure it unzooms when changing photos
-      if (zoomTrigger && zoomTrigger.classList.contains('is-zoomed')) {
-          zoomTrigger.classList.remove('is-zoomed');
-          document.body.classList.remove('no-scroll');
+      zoomTrigger.href = imagePaths[currentIndex];
+      // If zoomed, unzoom when changing photos
+      if (zoomTrigger.classList.contains('is-zoomed')) {
+        zoomTrigger.classList.remove('is-zoomed');
+        document.body.classList.remove('no-scroll');
       }
       console.log(`Updated photo to: ${imagePaths[currentIndex]} (Index: ${currentIndex})`);
     } else if (imagePaths.length === 0) {
@@ -108,37 +120,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex === 0) ? imagePaths.length - 1 : currentIndex - 1;
-      updatePhoto();
-    });
-  } else {
-    console.error("Prev button not found.");
-  }
+  // Previous Button Click
+  const handlePrevClick = () => {
+    currentIndex = (currentIndex === 0) ? imagePaths.length - 1 : currentIndex - 1;
+    updatePhoto();
+  };
+  prevBtn.removeEventListener('click', handlePrevClick); // Prevent double-listening
+  prevBtn.addEventListener('click', handlePrevClick);
+
+  // Next Button Click
+  const handleNextClick = () => {
+    currentIndex = (currentIndex === imagePaths.length - 1) ? 0 : currentIndex + 1;
+    updatePhoto();
+  };
+  nextBtn.removeEventListener('click', handleNextClick); // Prevent double-listening
+  nextBtn.addEventListener('click', handleNextClick);
+
+  console.log("Photography Viewer logic initialized.");
+}
 
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex === imagePaths.length - 1) ? 0 : currentIndex + 1;
-      updatePhoto();
-    });
-  } else {
-    console.error("Next button not found.");
-  }
-
-  document.addEventListener('turbo:frame-load', () => {
-    console.log("turbo:frame-load detected. Re-initializing Photography Viewer.");
-    if (mainPhoto && imagePaths.length > 0) {
-      mainPhoto.src = imagePaths[currentIndex];
-      if (zoomTrigger) {
-        zoomTrigger.href = imagePaths[currentIndex];
-        // Ensure zoom state is reset on frame load
-        zoomTrigger.classList.remove('is-zoomed');
-        document.body.classList.remove('no-scroll');
-      }
-    }
-  });
-
-  console.log("Photography Viewer script finished execution.");
+// 1. Initial page load: Run the initialization function
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("DOMContentLoaded: Running initial Photography Viewer setup.");
+  initializePhotographyViewer();
 });
+
+// 2. Turbo Frame Navigation: Re-run the initialization function
+// This listener should be on the document, and the `event.target` will be the turbo-frame.
+document.addEventListener('turbo:frame-load', (event) => {
+  // Check if the loaded frame is the one containing the photography viewer
+  if (event.target.id === 'main_content') { // Or whatever your frame ID is
+    console.log("turbo:frame-load on main_content detected. Re-initializing Photography Viewer.");
+    initializePhotographyViewer();
+  }
+});
+
+console.log("Photography Viewer script finished setup.");

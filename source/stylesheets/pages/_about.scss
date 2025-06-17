@@ -23,8 +23,11 @@ main { // Target the main content wrapper (from layout.html.erb: <main class="pt
   width: 250px;
   height: 270px;
   object-fit: cover;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #E2F1E7;
+  border: 1px solid #387478;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+
   margin-bottom: 20px;
   @media (min-width: 768px) {
     margin-bottom: 0;
