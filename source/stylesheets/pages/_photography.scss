@@ -1,58 +1,53 @@
 /* source/stylesheets/_photography.scss or site.scss */
+
 #photography-page {
-  padding-top: 80px; /* Adjust this value as needed to clear the navbar. Start with 80px. */
-  padding-bottom: 50px; /* Add some space at the bottom */
+  padding-top: 80px;
+  padding-bottom: 50px;
+
   h1 {
-    color: #E2F1E7; /* Or whatever color matches your green background gradient */
+    color: #E2F1E7;
     text-align: center;
-    margin-bottom: 40px; /* Space below the title */
+    margin-bottom: 40px;
   }
 }
+
 .photo-display-area {
   max-width: 800px;
-  margin: 50px auto;
+  margin: 50px auto; // Desktop: Centers the block with top/bottom margin
   text-align: center;
   padding: 20px;
   background-color: #E2F1E7;
   border: 1px solid #387478;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 16px; /* ADD THIS LINE */
+  border-radius: 16px;
+
+  // --- Mobile Specific Styles ---
+  @media (max-width: 767px) { // Standard mobile breakpoint
+    // Adjust horizontal margin to create space on the sides
+    margin: 50px 15px; // Apply 15px margin to left and right on mobile
+    // Keep padding as is, or adjust if you want less space inside the card on mobile
+    // padding: 15px; // Example: reduce internal padding slightly if desired
+  }
 }
 
 .image-aspect-ratio-wrapper {
-  position: relative; /* Needed for absolute positioning of the image */
+  position: relative;
   width: 100%;
-  /* Choose your desired aspect ratio here. Common for photography:
-     - For 3:2 landscape photos (width 3, height 2): (2 / 3) * 100% = 66.66%
-     - For 4:3 landscape photos (width 4, height 3): (3 / 4) * 100% = 75%
-     - For 16:9 landscape video-like: (9 / 16) * 100% = 56.25%
-     - For 1:1 square: 100%
-     - For 2:3 portrait (reverse of 3:2): (3 / 2) * 100% = 150%
-     Pick an aspect ratio that fits most of your photos well, or choose a common one like 3:2 or 4:3.
-  */
-  padding-bottom: 66.66%; /* Example: Setting for 3:2 aspect ratio */
-  overflow: hidden; /* Hides any part of the image that might extend beyond the wrapper */
-  margin-bottom: 20px; /* Space between image area and buttons */
-  background-color: #E2F1E7; /* A subtle background to show the reserved space */
+  padding-bottom: 66.66%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: #E2F1E7;
 }
 
 #main-photo {
-  position: absolute; /* Take image out of normal flow */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* object-fit determines how the image fits into the wrapper:
-     - 'contain': Scales the image to fit within the box, preserving its aspect ratio.
-                  Might leave empty space (letterboxing/pillarboxing) if image aspect ratio
-                  doesn't match the wrapper's. Usually best for photography to show entire image.
-     - 'cover': Scales the image to fill the box, preserving its aspect ratio.
-                Will crop parts of the image if its aspect ratio doesn't match the wrapper's.
-     - 'fill': Stretches/squishes the image to fill the box, *not* preserving aspect ratio. Avoid this.
-  */
-  object-fit: contain; /* RECOMMENDED for showing entire photos */
-  display: block; /* Still good practice */
-  margin: 0; /* Remove any previous margins that might interfere */
+  object-fit: contain;
+  display: block;
+  margin: 0;
 }
 
 .photo-navigation button {
@@ -60,15 +55,15 @@
   font-size: 1em;
   margin: 0 10px;
   cursor: pointer;
-  background-color: #629584; /* Start color of your gradient */
+  background-color: #629584;
   color: #E2F1E7;
-  border: 1px solid #629584; /* A darker green border from your gradient */
-  border-radius: 5px; /* Keep existing border-radius if you like it */
+  border: 1px solid #629584;
+  border-radius: 5px;
   transition: background-color 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .photo-navigation button:hover {
-  background-color: #387478; /* End color of your gradient on hover */
-  border-color: #629584; /* Swap border color on hover for effect */
+  background-color: #387478;
+  border-color: #629584;
 }

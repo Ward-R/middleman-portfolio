@@ -10,15 +10,15 @@ $light-green: #A2D9CE; // Ensure this is defined for hover effects
   padding-top: 50px;
   padding-bottom: 160px;
 
-  .text-center { // Target the existing div wrapping h2 and p
+  .text-center {
     h2 {
       margin-bottom: 20px;
       font-size: 2.5rem;
-      color: #E2F1E7; // This will now apply
+      color: #E2F1E7;
     }
     p {
       font-size: 1.1rem;
-      color: #E2F1E7; // This will now apply
+      color: #E2F1E7;
     }
   }
 
@@ -33,8 +33,8 @@ $light-green: #A2D9CE; // Ensure this is defined for hover effects
 
   .project-item-horizontal {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: row; // Desktop: image and text side-by-side
+    align-items: stretch; // IMPORTANT: Stretch items to fill the container's height on desktop
     width: 100%;
     max-width: 800px;
     border: 1px solid $project-border-color;
@@ -50,28 +50,62 @@ $light-green: #A2D9CE; // Ensure this is defined for hover effects
       transform: translateY(-5px);
     }
 
+    // --- Mobile Styles ---
     @media (max-width: 767px) {
-      flex-direction: column;
-      align-items: center;
+      flex-direction: column; // Stack items vertically on mobile
+      align-items: center; // Center the entire card's content horizontally when stacked
+
       .project-image-container {
-        width: 100%;
+        width: 100%;        // Image container takes full width of the card on mobile
+        max-width: unset;   // Remove desktop max-width restriction
+        padding: 15px;      // Provide overall padding to the image container on mobile
+        padding-bottom: 0;  // Remove bottom padding, spacing will be managed below the image
       }
+
+      .project-image-thumb {
+        width: 80%;         // Image itself scales to 80% of container on mobile
+        max-width: 200px;   // Max width for mobile image (prevents it from getting too big)
+        height: auto;
+        border-radius: 16px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto; // Center the image horizontally
+      }
+
       .project-details-horizontal {
-        width: 100%;
+        width: 100%;        // Text container takes full width of the card on mobile
+        padding: 15px;      // Consistent padding inside the text container
+        padding-top: 15px;  // Add top padding to create space from the image
+        text-align: center; // Center text on mobile for better readability
+      }
+
+      .project-links-horizontal {
+        justify-content: center; // Center the links when stacked
+      }
+
+      // Ensure other text elements are centered if not already by parent
+      h3,
+      .project-description,
+      .project-tags,
+      .project-team,
+      .project-date {
+        text-align: center;
       }
     }
   }
 
   .project-image-container {
     flex-shrink: 0;
-    width: 30%;
-    max-width: 250px;
-    height: 100%;
+    width: 30%; // Desktop: Image container takes 30% width
+    max-width: 250px; // Limits the max width of the image container
+    // height: 100%; // REMOVE THIS LINE or adjust if you have issues with vertical stretching of image container
+                     // if the description text is much longer or shorter than the image height.
+                     // The 'align-items: stretch' on parent handles height.
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
+    display: flex;         // Make this a flex container
+    align-items: center;   // Vertically center the image within its container on desktop
+    justify-content: center; // Horizontally center the image within its container on desktop
+    padding: 15px;         // Padding inside the image container
   }
 
   .project-image-thumb {
