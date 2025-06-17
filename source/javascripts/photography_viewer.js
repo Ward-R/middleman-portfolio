@@ -1,14 +1,15 @@
 // source/javascripts/photography_viewer.js
+
 console.log("Photography Viewer script loading...");
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("DOMContentLoaded: Initializing Photography Viewer.");
 
   const mainPhoto = document.getElementById('main-photo');
+  const zoomTrigger = mainPhoto ? mainPhoto.closest('.image-zoom-trigger') : null;
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  // IMPORTANT: Use the EXACT filenames from your source/images/photography/ directory
   const imagePaths = [
     "/images/photography/1-DSCF3844_u4cobo.jpg",
     "/images/photography/2-DSCF3877_azr4zp.jpg",
@@ -42,28 +43,65 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0;
 
   // Set the initial image based on the current src, or default to the first
-  if (mainPhoto && mainPhoto.src) {
+  if (mainPhoto && imagePaths.length > 0) {
     const initialSrc = new URL(mainPhoto.src).pathname;
     const initialIndex = imagePaths.indexOf(initialSrc);
     if (initialIndex !== -1) {
       currentIndex = initialIndex;
     } else {
-      // If initial src is not in our list, default to first image
       mainPhoto.src = imagePaths[0];
       console.warn(`Initial image src "${initialSrc}" not found in list. Defaulting to first image.`);
     }
+    if (zoomTrigger) {
+      zoomTrigger.href = imagePaths[currentIndex];
+    }
   } else if (mainPhoto) {
-    // If mainPhoto exists but has no src, set to the first image
     mainPhoto.src = imagePaths[0];
     console.log("main-photo had no initial src. Setting to first image.");
+    if (zoomTrigger) {
+      zoomTrigger.href = imagePaths[currentIndex];
+    }
   } else {
     console.error("main-photo element not found.");
-    return; // Exit if the main photo element isn't there
+    return;
   }
+
+  // --- NEW JS FOR TOGGLING ZOOM CLASS ---
+  if (zoomTrigger) {
+    zoomTrigger.addEventListener('click', (event) => {
+      event.preventDefault(); // Always prevent default link behavior for our custom zoom
+
+      // Toggle the 'is-zoomed' class
+      zoomTrigger.classList.toggle('is-zoomed');
+
+      // Optional: Add/remove 'no-scroll' class to body to prevent background scrolling
+      // This is a common practice for full-screen overlays
+      document.body.classList.toggle('no-scroll', zoomTrigger.classList.contains('is-zoomed'));
+
+    });
+
+    // Close zoom if user presses ESC key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && zoomTrigger.classList.contains('is-zoomed')) {
+            zoomTrigger.classList.remove('is-zoomed');
+            document.body.classList.remove('no-scroll'); // Remove no-scroll
+        }
+    });
+  }
+  // --- END NEW JS FOR TOGGLING ZOOM CLASS ---
+
 
   function updatePhoto() {
     if (mainPhoto && imagePaths.length > 0) {
       mainPhoto.src = imagePaths[currentIndex];
+      if (zoomTrigger) {
+        zoomTrigger.href = imagePaths[currentIndex];
+      }
+      // If the image is currently zoomed, make sure it unzooms when changing photos
+      if (zoomTrigger && zoomTrigger.classList.contains('is-zoomed')) {
+          zoomTrigger.classList.remove('is-zoomed');
+          document.body.classList.remove('no-scroll');
+      }
       console.log(`Updated photo to: ${imagePaths[currentIndex]} (Index: ${currentIndex})`);
     } else if (imagePaths.length === 0) {
       console.warn("No image paths defined.");
@@ -91,10 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('turbo:frame-load', () => {
     console.log("turbo:frame-load detected. Re-initializing Photography Viewer.");
-    // No specific re-initialization needed here for simple image swap
-    // as buttons are usually outside the frame or their event listeners persist.
-    // However, if the main-photo img itself is inside a frame that reloads
-    // without a full page refresh, this block helps.
+    if (mainPhoto && imagePaths.length > 0) {
+      mainPhoto.src = imagePaths[currentIndex];
+      if (zoomTrigger) {
+        zoomTrigger.href = imagePaths[currentIndex];
+        // Ensure zoom state is reset on frame load
+        zoomTrigger.classList.remove('is-zoomed');
+        document.body.classList.remove('no-scroll');
+      }
+    }
   });
 
   console.log("Photography Viewer script finished execution.");

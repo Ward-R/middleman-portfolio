@@ -2,7 +2,10 @@
   <h1>Photography</h1>
   <div class="photo-display-area">
     <div class="image-aspect-ratio-wrapper">
-      <img id="main-photo" src="/images/photography/1-DSCF3844_u4cobo.jpg" alt="Current Photo">
+      <%# WRAP THE IMG WITH AN ANCHOR TAG %>
+      <a href="/images/photography/1-DSCF3844_u4cobo.jpg" class="image-zoom-trigger">
+        <img id="main-photo" src="/images/photography/1-DSCF3844_u4cobo.jpg" alt="Current Photo">
+      </a>
     </div>
     <div class="photo-navigation">
       <button id="prevBtn">Prev</button> <%# Make sure ID is prevBtn %>
