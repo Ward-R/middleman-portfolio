@@ -20,37 +20,24 @@
   team_project: true
   team_members: ["Will Sebastian", "Juilian Schoenfeld", "Hikari Hashiguchi"]
 
+- name: web-service-gin
+  description: This is my first go/gin project. It is a basic RESTful API made following a tutorial from teh go.dev website. I made it to start to get more familiar with APIs and go.
+  image: projects/web-service-gin-pic.png
+  url: https://go.dev/doc/tutorial/web-service-gin
+  github: https://github.com/Ward-R/web-service-gin
+  online: false
+  tags: ["Go", "Gin", "RESTful API"]
+  date: "July 2025"
+  team_project: false
+  team_members: []
 
-  # filler fake apps for testing
-
-# - name: Airbnb Clone
-#   description: A full-stack marketplace platform for property rentals.
-#   image: projects/airbnb_clone.png # Replace with actual image path
-#   url: https://airbnb-clone-app.herokuapp.com
-#   github: https://github.com/yourusername/airbnb-clone
-#   online: true
-#   tags: ["Rails", "PostgreSQL", "JavaScript", "Mapbox API", "Heroku"]
-#   date: "January 2025"
-#   team_project: true
-#   team_members: ["Alice Smith", "Bob Johnson"] # Optional: list names
-
-# - name: Tokyo Foodie (Final Project)
-#   description: A platform connecting users with unique food experiences in Tokyo.
-#   image: projects/tokyo_foodie.png # Replace with actual image path
-#   url: https://tokyo-foodie.herokuapp.com
-#   github: https://github.com/yourusername/tokyo-foodie
-#   online: true
-#   tags: ["Rails API", "Go (Backend)", "React (Frontend)", "PostgreSQL", "Cloudinary"]
-#   date: "April 2025"
-#   team_project: true
-#   team_members: ["Alice Smith", "Bob Johnson", "Your Name"] # List team members if applicable
-
-# - name: Restaurant Reviews
-#   description: Basic app to review restaurants.
-#   image: projects/restaurant_reviews.png # Replace with actual image path
-#   url: ""
-#   github: https://github.com/yourusername/restaurant-reviews
-#   online: false
-#   tags: ["Rails", "PostgreSQL", "CSS"]
-#   date: "December 2024"
-#   team_project: false
+- name: KojoLog
+  description: This is a project I am currently working on in my spare time. It is an industrial log book. This is used for recording the operation and maintenance of pressure vessels and is typically a legal, regulated document/database. I will updated this when it is complete.
+  image: projects/kojolog.png
+  url: n/a
+  github: https://github.com/Ward-R/kojolog
+  online: false
+  tags: ["Rails", "PostgreSQL", "StimulusJS", "Bootstrap", "HTML", "CSS", "JavaScript"]
+  date: "June-2025 - Ongoing"
+  team_project: false
+  team_members: []
