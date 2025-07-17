@@ -31,6 +31,17 @@
   team_project: false
   team_members: []
 
+- name: quiz-game
+  description: This is a simple command line quiz game made following an exercise from gophercises.com. It helped me get more familiar with file reading and parsing, command-line flags, channels, the time package, concurrent user input, and using interfaces in Go.
+  image: projects/quiz-game-pic.png
+  url: https://gophercises.com/exercises/quiz
+  github: https://github.com/Ward-R/quiz-game
+  online: false
+  tags: ["Go", "CLI", "Concurrency", "File I/O"]
+  date: "July 2025"
+  team_project: false
+  team_members: []
+
 - name: KojoLog
   description: This is a project I am currently working on in my spare time. It is an industrial log book. This is used for recording the operation and maintenance of pressure vessels and is typically a legal, regulated document/database. I will updated this when it is complete.
   image: projects/kojolog.png
