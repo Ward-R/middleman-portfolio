@@ -1,5 +1,5 @@
- <turbo-frame id="main_content">
-  <section id="jishin-section" class="container" style="padding-top: 50px; padding-bottom: 160px;">
+<turbo-frame id="main_content">
+  <section id="earthquakes-section" class="container" style="padding-top: 50px; padding-bottom: 160px;">
     <div class="text-center mb-5">
       <h2 style="color: #E2F1E7; font-size: 2.5rem; margin-bottom: 20px;">Jishin API Dashboard</h2>
       <p style="color: #E2F1E7; font-size: 1.1rem;">Real-time earthquake data from the Japan Meteorological Agency (JMA)
@@ -15,13 +15,6 @@
             <div id="api-status" class="mb-3" style="color: #629584;">
               Checking...
             </div>
-            <p style="color: #629584;">
-              <strong>Live API:</strong>
-              <a href="https://aftbll7aci.execute-api.ap-northeast-1.amazonaws.com/prod" target="_blank" style="color:
-  #A2D9CE; text-decoration: none;">
-                View API Documentation
-              </a>
-            </p>
           </div>
         </div>
       </div>
@@ -144,64 +137,6 @@
     </div>
   </section>
 </turbo-frame>
-<script>
-  // Inline JavaScript to avoid file loading issues
-  document.addEventListener('DOMContentLoaded', function() {
-    const API_BASE = 'https://aftbll7aci.execute-api.ap-northeast-1.amazonaws.com/prod';
-
-    // Check API status
-    fetch(`${API_BASE}/health`)
-      .then(response => response.json())
-      .then(data => {
-        const statusEl = document.getElementById('api-status');
-        if (data.status === 'healthy') {
-          statusEl.textContent = 'Online';
-          statusEl.style.color = '#28a745';
-        } else {
-          statusEl.textContent = 'Offline';
-          statusEl.style.color = '#dc3545';
-        }
-      })
-      .catch(() => {
-        const statusEl = document.getElementById('api-status');
-        statusEl.textContent = 'Error';
-        statusEl.style.color = '#dc3545';
-      });
-
-    // Fetch statistics
-    fetch(`${API_BASE}/earthquakes/stats`)
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('total-count').textContent = data.total_earthquakes || '-';
-        document.getElementById('recent-count').textContent = data.last_24_hours || '-';
-        document.getElementById('avg-magnitude').textContent = data.average_magnitude || '-';
-        document.getElementById('max-magnitude').textContent = data.strongest_magnitude || '-';
-      })
-      .catch(console.error);
-
-    // Fetch recent earthquakes
-    fetch(`${API_BASE}/earthquakes?limit=10`)
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.getElementById('earthquakes-table');
-        tbody.innerHTML = '';
-
-        data.forEach(eq => {
-          const row = tbody.insertRow();
-          const time = new Date(eq.OriginTime).toLocaleString('ja-JP');
-
-          row.innerHTML = `
-            <td style="color: #629584;">${time}</td>
-            <td style="color: #629584;">${eq.EnLocation}</td>
-            <td style="color: #629584;">${eq.Magnitude}</td>
-            <td style="color: #629584;">${eq.DepthKm}km</td>
-            <td style="color: #629584;">${eq.MaxIntensity}</td>
-          `;
-        });
-      })
-      .catch(() => {
-        document.getElementById('earthquakes-table').innerHTML =
-          '<tr><td colspan="5" class="text-center" style="color: #dc3545;">Failed to load earthquake data</td></tr>';
-      });
-  });
-</script>
+<% content_for :scripts_for_earthquakes do %>
+  <%= javascript_include_tag "earthquakes" %>
+<% end %>
